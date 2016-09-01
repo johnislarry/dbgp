@@ -123,7 +123,7 @@ init packet: ::
 
 
 Attributes in the init element can include:
-    
+
     ================ ========================================================
     Attribute        Description
     ================ ========================================================
@@ -140,7 +140,7 @@ Attributes in the init element can include:
                      execution and the protocol connection.  This value
                      should not be expected to be set in 'remote'
                      debugging situations where the IDE is not in
-                     control of the process.  
+                     control of the process.
     thread           the systems thread id
     parent           the appid of the application that spawned the
                      process.  When an application is executed, it
@@ -193,10 +193,10 @@ if it has not, the proxy could execute the IDE directly.
 
 To support proxies and jit deamons, the IDE should be configured with
 and ip:port pointing to the proxy/jit.  The IDE then makes a
-connection to the proxy when it starts and sends the following command: 
+connection to the proxy when it starts and sends the following command:
 
     IDE command ::
-    
+
         proxyinit -a ip:port -k ide_key -m [0|1]
 
     ==  ========================================================
@@ -212,9 +212,9 @@ connection to the proxy when it starts and sends the following command:
     ==  ========================================================
 
     IDE command ::
-    
+
         proxystop -k ide_key
-    
+
     The IDE sends a proxystop command when it wants the proxy
     server to stop listening for it.
 
@@ -513,18 +513,18 @@ The following are predefined error codes for the response to commands:
     0 - no error
     1 - parse error in command
     2 - duplicate arguments in command
-    3 - invalid options (ie, missing a required option, invalid value for a 
+    3 - invalid options (ie, missing a required option, invalid value for a
         passed option)
     4 - Unimplemented command
     5 - Command not available (Is used for async commands. For instance
         if the engine is in state "run" then only "break" and "status"
-        are available). 
+        are available).
 
 100 File related errors ::
 
     100 - can not open file (as a reply to a "source" command if the
           requested source file can't be opened)
-    101 - stream redirect failed 
+    101 - stream redirect failed
 
 200 Breakpoint, or code flow errors ::
 
@@ -549,7 +549,7 @@ The following are predefined error codes for the response to commands:
     206 - Error evaluating code (use from eval() (or perhaps
           property_get for a full name get))
     207 - Invalid expression (the expression used for a non-eval()
-          was invalid) 
+          was invalid)
 
 300 Data errors ::
 
@@ -560,13 +560,13 @@ The following are predefined error codes for the response to commands:
     301 - Stack depth invalid (the -d stack depth parameter did not
           exist (ie, there were less stack elements than the number
           requested) or the parameter was < 0)
-    302 - Context invalid (an non existing context was requested) 
+    302 - Context invalid (an non existing context was requested)
 
 900 Protocol errors ::
 
     900 - Encoding not supported
     998 - An internal exception in the debugger occurred
-    999 - Unknown error 
+    999 - Unknown error
 
 
 6.6 file paths
@@ -670,7 +670,7 @@ to commands.
 7.2.1 Feature Names
 ^^^^^^^^^^^^^^^^^^^
 
-The following features strings MUST be available: 
+The following features strings MUST be available:
 
     ========================= ======= ==========================================
     language_supports_threads get     [0|1]
@@ -726,7 +726,7 @@ The following features strings MUST be available:
     ========================= ======= ==========================================
 
 The following features strings MAY be available, if they are not, the IDE should
-assume that the feature is not available: 
+assume that the feature is not available:
 
     ========================= ======= ==========================================
     supports_postmortem       get     [0|1]  This feature lets an IDE know that
@@ -750,7 +750,7 @@ such as the following examples: ::
 7.2.2 feature_get
 ^^^^^^^^^^^^^^^^^
 
-arguments for feature_get include: 
+arguments for feature_get include:
 
     ==      ==========================================
     -n      feature_name
@@ -795,7 +795,7 @@ Note: The IDE does not have to listen for additional debugger connections if it
 does not support debugging multiple sessions. debugger engines must handle
 connection failures gracefully.
 
-arguments for feature_set include: 
+arguments for feature_set include:
 
     ==      ==========================================
     -n      feature_name
@@ -1060,10 +1060,10 @@ debugger engine.
 
 IDE to debugger engine::
 
-    breakpoint_get -i TRANSACTION_ID -d BREAKPOINT_ID 
+    breakpoint_get -i TRANSACTION_ID -d BREAKPOINT_ID
 
 where,
-    
+
     ==================  =====================================================
     BREAKPOINT_ID       is the unique *session breakpoint id* returned by
                         *breakpoint_set*.
@@ -1108,12 +1108,12 @@ where the arguments are as follows.  All arguments are optional, however
 at least one argument should be present.  See breakpoint_set_ for a description of
 each argument:
 
-    ==  ===============  
+    ==  ===============
     -s  STATE
     -n  LINENO
     -h  HIT_VALUE
     -o  HIT_CONDITION
-    ==  ===============  
+    ==  ===============
 
 debugger engine to IDE::
 
@@ -1203,7 +1203,7 @@ specified, only one stack element is returned, for the depth
 requested, though child elements may be returned also.  The
 current context is stack depth of zero, the 'oldest' context
 (in some languages known as 'main') is the highest numbered
-context. 
+context.
 
     ==      ==========================================
     -d      stack depth (optional)
@@ -1236,7 +1236,7 @@ debugger engine ::
     </response>
 
 Attributes for the stack element can include:
-    
+
     =========   ========================================================
     Attribute   Description
     =========   ========================================================
@@ -1267,7 +1267,7 @@ names.  The numerical id attribute returned with the names is used in other
 commands such as context_get to identify the context.  The context
 id zero is always considered to be the 'default' context is no
 context id is provided.  In most languages, this will the be
-'local' context. 
+'local' context.
 
     ==      ========================================================
     -d      stack depth (optional)
@@ -1293,7 +1293,7 @@ debugger engine ::
 Returns an array of properties in a given context at a given
 stack depth.  If the stack depth is omitted, the current
 stack depth is used.  If the context name is omitted, the context
-with an id zero is used (generally the 'locals' context). 
+with an id zero is used (generally the 'locals' context).
 
     ==      ========================================================
     -d      stack depth (optional)
@@ -1347,7 +1347,7 @@ only returned if max_depth > 0 and max_children > 0. ::
     </property>
 
 Attributes in the property element can include:
-    
+
     =============== ========================================================
     Attribute       Description
     =============== ========================================================
@@ -1413,7 +1413,7 @@ as sub elements of the <property> element::
         <classname encoding="base64">...</classname>
         <value encoding="base64">...</value>
     </property>
-    
+
 The debugger engine MAY only pick this format if the extended_properties feature
 has been negotiated and SHOUD only pick this format if one of the attribute values
 for ``name``, ``fullname``, ``classname`` or ``value`` contain information that
@@ -1524,7 +1524,7 @@ it supports.  There may be multiple map elements with the same
 type attribute value, but the name value must be unique.  This
 allows a language to map multiple language specific types into
 one of the common data types (eg. float and double can both
-be mapped to float). 
+be mapped to float).
 
 IDE ::
 
@@ -1655,7 +1655,7 @@ is assumed.
 The body of the request is the URI (retrieved from the stack info),
 the body of the response is the data contents of the URI.  If the
 file uri is not provided, then the file for the current context
-is returned. 
+is returned.
 
     ==      ========================================================
     -b      begin line (optional)
@@ -1682,11 +1682,11 @@ debugger engine ::
 Body of the request is null, body of the response is true or false.
 Upon receiving one of these redirect requests, the debugger engine
 will start to copy data bound for one of these streams to the IDE,
-using the message packets. 
+using the message packets.
 
     ==      ===========================================================
     -c      [0|1|2] 0 - disable, 1 - copy data, 2 - redirection ::
-    
+
                 0 (disable)   stdout/stderr output goes to regular
                               place, but not to IDE
                 1 (copy)      stdout/stderr output goes to both regular
@@ -1734,7 +1734,7 @@ If the IDE requests stdin, it will *always* be a redirection,
 and the debugger engine must not accept stdin from any other
 source.  The debugger engine may choose to not allow stdin to be
 redirected in certain situations (such as when running under
-a web server). 
+a web server).
 
     ==      ============================================================
     -c      [0|1] 0 - disable, 1 - redirection ::
@@ -1785,12 +1785,14 @@ as Python, which have separate statements for these, will need to handle
 both appropriately.  For implementations that need to be more explicit, use
 the expr or exec commands below.
 
-The eval and expr commands can include the following optional parameter:
+The eval and expr commands can include the following optional parameters:
 
     ==      ===============================================================
     -p      data page: optional for arrays, hashes, objects, etc.; debugger
             engine should assume zero if not provided — similar to the -p
             parameter for property_get.
+    -d      stack depth: stack depth at which the given code should be
+            evaluated; debugger engine should assume zero if not provided.
     ==      ===============================================================
 
 IDE ::
@@ -1926,10 +1928,10 @@ debugger engine.
 
 IDE to debugger engine::
 
-    spawnpoint_get -i TRANSACTION_ID -d SPAWNPOINT_ID 
+    spawnpoint_get -i TRANSACTION_ID -d SPAWNPOINT_ID
 
 where,
-    
+
     ==================  =====================================================
     SPAWNPOINT_ID       is the unique *session spawnpoint id* returned by
                         *spawnpoint_set*.
@@ -2437,5 +2439,3 @@ A. ChangeLog
 - 8 break command clarified so it can only be sent while the debugger
   engine is in a run state.
 - 8 eval can return a property as part of the response
-
-
